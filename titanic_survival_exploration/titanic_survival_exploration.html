@@ -15587,6 +15587,22 @@ Make sure to keep track of the various features and conditions you tried before 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="How-I-get-predictions_3():">How I get predictions_3():<a class="anchor-link" href="#How-I-get-predictions_3():">&#182;</a></h1><ul>
+<li>After checking "Sex", "Age", I checked "Fare", found that ppl who paid more than 300 all survived.</li>
+<li>Then I check "Pclass", found ppl with "Pclass" = 1 have higher survival rate, hence want to dig more in "Pclass" = 1.</li>
+<li>With "Pclass" = 1, I checked "SibSp", "Parch", "Embarked", luckily found some categories are all survived.</li>
+<li>I was at 79.5%-ish accuracy when I used up "Fare", "Pclass", "Parch", "SibSp" and "Embarked", So I started to revisit "Age", and luckily found another category with all survivals. Yay!</li>
+<li>Here I am with 80.02%.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Question-4">Question 4<a class="anchor-link" href="#Question-4">&#182;</a></h3><p><em>Describe the steps you took to implement the final prediction model so that it got an accuracy of at least 80%. What features did you look at? Were certain features more informative than others? Which conditions did you use to split the survival outcomes in the data? How accurate are your predictions?</em><br>
 <strong>Hint:</strong> Run the code cell below to see the accuracy of your predictions.</p>
 

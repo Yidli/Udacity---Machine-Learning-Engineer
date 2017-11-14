@@ -14166,7 +14166,7 @@ Hence we should use Logistic Regression to predict individuals making more than 
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong> 
 Base on our finding, we decided to use logistic regression to predict if individual is making more than $50,000.</p>
-<p>Logistic Regression is very similar to Linear Regression. For a normal linear regression y = w*x + b. Both x and y are continuous and follow distributions of gaussion/normal. For Logistic Regression, the difference is that y in our case, is not a continuous varibale, but a 0/1. Hence we give it another distribution: logistic distribution, which lies between 0 and 1.
+<p>Logistic Regression is very similar to Linear Regression. For a general normal linear regression (if possible, draw a scatter plot), both x and y are continuous and follow some sort of distributions across the axis (could be from 0 to infinite large, we called them normal/gaussian). For Logistic Regression, the difference is that y in our case, is not a continuous varibale, but a 0/1. Hence we give it another distribution: logistic distribution, which lies between 0 and 1 (draw a plot if possible).
 Now think of if we have 2 features as capital-gain and hours-per-week from our dataset, we plot these 2 features in a 2-d plot: each data point will be a scatter in the plot. We can color each point by the target variable which we are trying to predict: red of income &lt;= $50,000 and green for income > $50,000. What we are trying to do is to find a line in this 2-d plot to separate dots by colors.
 Now imagine we have more than 2 features, and some are categorical variable like eduction, etc. First let's transform categorical varibles into binary varibles. So, if we have 4 different levels of education, we will need at least 3 columns to represent this information. Then what we are trying to do is to find a line to separate dots of colors in this multi-dimension plot.
 Same as linear regression, by giving each feature a weight, we compute the outcome which will be a number between 0 and 1. This will be the probability if individual making more than $50,000.</p>
@@ -14202,7 +14202,7 @@ Same as linear regression, by giving each feature a weight, we compute the outco
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39;, &#39;make_scorer&#39;, and any other necessary libraries</span>
@@ -14214,9 +14214,8 @@ Same as linear regression, by giving each feature a weight, we compute the outco
 
 <span class="c1"># TODO: Create the parameters list you wish to tune, using a dictionary if needed.</span>
 <span class="c1"># HINT: parameters = {&#39;parameter_1&#39;: [value1, value2], &#39;parameter_2&#39;: [value1, value2]}</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;newton-cg&#39;</span><span class="p">,</span> <span class="s1">&#39;lbfgs&#39;</span><span class="p">],</span>   <span class="c1"># , &#39;sag&#39;</span>
-              <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">],</span>
-              <span class="s1">&#39;random_state&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">20160101</span><span class="p">]}</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;newton-cg&#39;</span><span class="p">,</span> <span class="s1">&#39;lbfgs&#39;</span><span class="p">],</span>
+              <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">]}</span>
 
 <span class="c1"># TODO: Make an fbeta_score scoring object using make_scorer()</span>
 <span class="n">scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">fbeta_score</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
@@ -14356,7 +14355,9 @@ Recall that in Question 1, the naive model is outputting accuracy 0.2478 and F-s
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-By applying a Gradient Boosting Classifier below, the most important 5 features are: capital-gain, capital-loss, marital-status_ Married-civ-spouse, age and education-num (importance from highest).</p>
+Before we dive into any analysis, I think the top 5 features impacting if an individual making more than $50,000 are: capital-gain, education_num, education<em>level, age and occupation.
+Below by applying a Gradient Boosting Classifier below, the most important 5 features are: capital-gain, capital-loss, marital-status\</em> Married-civ-spouse, age and education-num (importance from highest).
+By looking at the grid search on logistic regression above, sorting out the coeficient of all features, we found the top 5 features turn out to be: capital-gain, hours-per-week, education-num, age, marital-status_ Married-civ-spouse. A little different result than Gradient Boosting, but close enough. I will take both lists into account.</p>
 
 </div>
 </div>
@@ -14823,6 +14824,113 @@ Model accuracy: 0.863018242123 , fscore:  0.73953385618
       <th>42</th>
       <td>0.0237199</td>
       <td>occupation_ Other-service</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">features_importance_grd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">best_clf</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">features_importance_grd</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">,</span><span class="s1">&#39;coef&#39;</span><span class="p">]</span>
+<span class="n">features_importance_grd</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;coef&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[33]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>coef</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>capital-gain</td>
+      <td>2.265310</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>hours-per-week</td>
+      <td>2.234601</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>education-num</td>
+      <td>1.945710</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>age</td>
+      <td>1.476857</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>marital-status_ Married-civ-spouse</td>
+      <td>1.307301</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>capital-loss</td>
+      <td>1.217486</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>relationship_ Wife</td>
+      <td>1.135500</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>education_level_ Prof-school</td>
+      <td>1.089641</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>occupation_ Exec-managerial</td>
+      <td>0.834934</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>education_level_ Doctorate</td>
+      <td>0.820177</td>
     </tr>
   </tbody>
 </table>

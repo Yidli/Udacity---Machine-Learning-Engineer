@@ -14166,7 +14166,7 @@ Hence we should use Logistic Regression to predict individuals making more than 
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong> 
 Base on our finding, we decided to use logistic regression to predict if individual is making more than $50,000.</p>
-<p>Logistic Regression is very similar to Linear Regression. For a general normal linear regression (if possible, draw a scatter plot), both x and y are continuous and follow some sort of distributions across the axis (could be from 0 to infinite large, we called them normal/gaussian). For Logistic Regression, the difference is that y in our case, is not a continuous varibale, but a 0/1. Hence we give it another distribution: logistic distribution, which lies between 0 and 1 (draw a plot if possible).
+<p>Logistic Regression is a method we use to predict if target is yes or no by using a bunch of features. For a general regression (if possible, draw a scatter plot), both x and y are continuous and follow some sort of distributions across the axis. For Logistic Regression, the difference is that y in our case, is not a continuous varibale, but a 0/1. Hence we give it another distribution: logistic distribution, which lies between 0 and 1 (draw a plot if possible). So far we talked about using one x to predict on y. But in our data set, we have multiple features.
 Now think of if we have 2 features as capital-gain and hours-per-week from our dataset, we plot these 2 features in a 2-d plot: each data point will be a scatter in the plot. We can color each point by the target variable which we are trying to predict: red of income &lt;= $50,000 and green for income > $50,000. What we are trying to do is to find a line in this 2-d plot to separate dots by colors.
 Now imagine we have more than 2 features, and some are categorical variable like eduction, etc. First let's transform categorical varibles into binary varibles. So, if we have 4 different levels of education, we will need at least 3 columns to represent this information. Then what we are trying to do is to find a line to separate dots of colors in this multi-dimension plot.
 Same as linear regression, by giving each feature a weight, we compute the outcome which will be a number between 0 and 1. This will be the probability if individual making more than $50,000.</p>
@@ -14355,9 +14355,8 @@ Recall that in Question 1, the naive model is outputting accuracy 0.2478 and F-s
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-Before we dive into any analysis, I think the top 5 features impacting if an individual making more than $50,000 are: capital-gain, education_num, education<em>level, age and occupation.
-Below by applying a Gradient Boosting Classifier below, the most important 5 features are: capital-gain, capital-loss, marital-status\</em> Married-civ-spouse, age and education-num (importance from highest).
-By looking at the grid search on logistic regression above, sorting out the coeficient of all features, we found the top 5 features turn out to be: capital-gain, hours-per-week, education-num, age, marital-status_ Married-civ-spouse. A little different result than Gradient Boosting, but close enough. I will take both lists into account.</p>
+Before we dive into any analysis, I think the top 5 features impacting if an individual making more than $50,000 are: capital-gain, education_num, education_level, age and occupation.
+Reasons are more common sense. Usually more capitals processed higher income. Higher num of education (assume is years spent in school) means higher level in education, leads to higher tier of jobs hence higher income. For age, higher age means more years of professinal experience, which means higher income. Different occupations get paid different, hence should be impacting income here too.</p>
 
 </div>
 </div>
@@ -14964,7 +14963,10 @@ Model accuracy: 0.863018242123 , fscore:  0.73953385618
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-By using only top 5 important features dicovered in Question 6, the performance of the model decreased (accuracy drops from 0.8630 to 0.8294).
+Above by applying a Gradient Boosting Classifier below, the most important 5 features are: capital-gain, capital-loss, marital-status_ Married-civ-spouse, age and education-num (importance from highest).
+By looking at the grid search on logistic regression above, sorting out the coeficient of all features, we found the top 5 features turn out to be: capital-gain, hours-per-week, education-num, age, marital-status_ Married-civ-spouse. A little different result than Gradient Boosting, but close enough. I will take both lists into account.
+Compared to what my guess was in the beginning of Question 6: capital-gain, education_num, education_level, age and occupation. I would say it's not too off, so our result is making sense from common sense. 2 things that I missed might be martial status and hours per week. But if we think of them, also make sense from common sense. The average age of married people will be higher than single people. More hours spent at week, higher income.</p>
+<p>By using only top 5 important features dicovered in Question 6, the performance of the model decreased (accuracy drops from 0.8630 to 0.8294).
 We are kind of expecting the performance will drop because after all we are using a portion of information to do the same prediction.</p>
 
 </div>

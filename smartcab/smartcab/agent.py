@@ -78,16 +78,7 @@ class LearningAgent(Agent):
         
         # Set 'state' as a tuple of relevant data for the agent        
         # state = (waypoint, inputs['light'], inputs['left'], inputs['right'], inputs['oncoming'])
-        def xstr(s):
-            if s is None:
-                return 'None'
-            else:
-                return str(s)
-        
-        state = xstr(waypoint) + "_" + inputs['light'] + "_" + xstr(inputs['left']) + "_" +  xstr(inputs['oncoming'])
-        if self.learning:
-            self.Q[state] = self.Q.get(state, {None:0.0, 'forward':0.0, 'left':0.0, 'right':0.0})
-
+        state = (waypoint, inputs['light'], inputs['left'], inputs['oncoming'])
         return state
 
 
@@ -204,7 +195,7 @@ def run():
     #   learning   - set to True to force the driving agent to use Q-learning
     #    * epsilon - continuous value for the exploration factor, default is 1
     #    * alpha   - continuous value for the learning rate, default is 0.5
-    agent = env.create_agent(LearningAgent, learning=True, epsilon=1.0, alpha=0.04)
+    agent = env.create_agent(LearningAgent, learning=True, epsilon=1.0, alpha=0.01)
     
     ##############
     # Follow the driving agent
@@ -226,7 +217,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test = 100, tolerance=0.01)
+    sim.run(n_test = 10, tolerance=0.1)
 
 
 if __name__ == '__main__':
